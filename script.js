@@ -1,0 +1,9 @@
+// Variables
+
+
+
+// Create square divs
+
+
+
+//
