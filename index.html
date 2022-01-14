@@ -9,8 +9,24 @@
     <title>Etch a Sketch</title>
 </head>
 <body>
+    <header>
+        <h1>Etch a Sketch</h1>
+    </header>
     <main>
-        <div id="container"></div>
+        <div id="SettingsContainer">
+            <input type="color" name="ColorSelected" id="ColorSelected">
+            <button>Randomize</button>
+            <button>Erase</button>
+            <div id="GridContainer">
+                <span>Grid</span>
+                <input type="range" name="Grid" id="Grid" min="1" max="100" >
+                <span id="GridOutput"></span>
+            </div>
+        </div>
+
+        <div id="SquareContainer">
+
+        </div>
     </main>
 </body>
 </html>
