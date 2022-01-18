@@ -14,17 +14,18 @@
     </header>
     <main>
         <div id="SettingsContainer">
-            <input type="color" name="ColorSelected" id="ColorSelected">
+            <input type="color" name="ColorSelected" id="ColorSelected" value="#363636">
             <button>Randomize</button>
-            <button>Erase</button>
+            <button id="EraserButton">Erase</button>
+            <button id="ClearButton">Clear</button>
             <div id="GridContainer">
                 <span>Grid</span>
-                <input type="range" name="Grid" id="Grid" min="1" max="100" >
+                <input type="range" name="GridRange" id="GridRange" value="16" min="1" max="100" >
                 <span id="GridOutput"></span>
             </div>
         </div>
 
-        <div id="SquareContainer">
+        <div id="Grid">
 
         </div>
     </main>
