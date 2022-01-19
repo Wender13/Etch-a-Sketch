@@ -108,7 +108,7 @@ function setGrid(size) {
 
     for(let i = 0; i < size * size; i++){
         const GridElement = document.createElement('div')
-        GridElement.addEventListener('click', changeColor)
+        GridElement.addEventListener('mouseover', changeColor)
         Grid.appendChild(GridElement)
     }
 }
