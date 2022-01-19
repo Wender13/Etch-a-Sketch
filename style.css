@@ -63,6 +63,10 @@ button:hover {
     background: gray;
 }
 
+button.active {
+    background: red;
+}
+
 #GridContainer {
     display: flex;
     flex-direction: column;

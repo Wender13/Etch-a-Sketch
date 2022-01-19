@@ -13,6 +13,8 @@ let CurrentMode = DefaultMode
 let CurrentGridSize = DefaultGridSize
 
 const Grid = document.getElementById('Grid')
+const ColorButton = document.getElementById('ColorButton')
+const RandomizeButton = document.getElementById('RandomizeButton')
 const EraserButton = document.getElementById('EraserButton')
 const ClearButton = document.getElementById('ClearButton')
 const ColorSelected = document.getElementById('ColorSelected')
@@ -27,12 +29,66 @@ GridRange.addEventListener('input', function() {
 
 // Functions
 
+// Random colors
+
+function rainbowMode(mode) {
+    if (mode == 'rainbow') {
+        window.addEventListener('mousemove', randomize)
+    } else {
+        window.removeEventListener('mousemove', randomize)
+    }
+}
+
+function randomize() {
+    const r = Math.floor(Math.random() * 256)
+    const g = Math.floor(Math.random() * 256)
+    const b = Math.floor(Math.random() * 256)
+    setNewColor(`rgb(${r}, ${g}, ${b})`)
+}
+
+// App mode
+
+function Mode(currentMode) {
+    if(currentMode == 'eraser'){
+        EraserButton.classList.add('active')
+        RandomizeButton.classList.remove('active')
+        putColorButton()
+        removeColorInput()
+        rainbowMode('eraser')
+        setNewColor('white')
+    } else if(currentMode == 'color'){
+        RandomizeButton.classList.remove('active')
+        EraserButton.classList.remove('active')
+        removeColorButton()
+        putColorInput()
+        rainbowMode('color')
+        setNewColor(ColorSelected.value)
+    } else if(currentMode == 'rainbow'){
+        RandomizeButton.classList.add('active')
+        EraserButton.classList.remove('active')
+        putColorButton()
+        removeColorInput()
+        rainbowMode('rainbow')
+    }
+}
+
+// Set new color
+
 function setNewColor(newColor) {
     CurrentColor = newColor
 }
 
+// Set new grid size
+
 function setNewGridSize(newSize) {
     CurrentGridSize = Number(newSize)
+}
+
+// Set new current mode
+
+function setNewMode(newMode) {
+    CurrentMode = newMode
+    Mode(CurrentMode)
 }
 
 function reloadGrid() {
@@ -44,12 +100,6 @@ function clearGrid() {
     Grid.innerHTML = ''
   }
 
-ColorSelected.onchange = (e) => setNewColor(e.target.value)
-GridRange.onchange = (e) => setNewGridSize(e.target.value)
-ClearButton.onclick = () => reloadGrid()
-EraserButton.onclick = () => setNewColor('white')
-
-
 // Create grid elements
 
 function setGrid(size) {
@@ -58,7 +108,7 @@ function setGrid(size) {
 
     for(let i = 0; i < size * size; i++){
         const GridElement = document.createElement('div')
-        GridElement.addEventListener('mouseover', changeColor)
+        GridElement.addEventListener('click', changeColor)
         Grid.appendChild(GridElement)
     }
 }
@@ -67,4 +117,35 @@ function changeColor(element) {
     element.target.style.backgroundColor = CurrentColor
 }
 
-window.onload = () => setGrid(DefaultGridSize)
+// Remove|Put color button
+
+function removeColorButton() {
+    ColorButton.style.display = 'none'
+}
+
+function putColorButton() {
+    ColorButton.style.display = ''
+}
+
+// Remove|Put color input
+
+function removeColorInput() {
+    ColorSelected.style.display = 'none'
+}
+
+function putColorInput() {
+    ColorSelected.style.display = ''
+}
+
+// Events
+
+window.onload = () => {
+    setGrid(DefaultGridSize)
+    removeColorButton()
+}
+ColorSelected.onchange = (e) => setNewColor(e.target.value)
+ColorButton.onclick = () => setNewMode('color')
+RandomizeButton.onclick = () => setNewMode('rainbow')
+EraserButton.onclick = () => setNewMode('eraser')
+ClearButton.onclick = () => reloadGrid()
+GridRange.onchange = (e) => setNewGridSize(e.target.value)
