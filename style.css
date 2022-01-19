@@ -24,7 +24,7 @@ main {
     font-weight: bolder;
     font-size: 1.2em;
     height: 100%;
-    margin-top: 1.5em;
+    margin-top: 1.2em;
     padding: 16px;
     display: flex;
     justify-content: space-evenly;
@@ -80,4 +80,17 @@ button.active {
     height: 500px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.623);
     display: grid;
+}
+
+footer {
+    text-align: center;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 166, 0);
+    font-size: 1.2em;
 }
